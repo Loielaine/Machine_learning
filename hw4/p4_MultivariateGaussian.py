@@ -60,16 +60,17 @@ indice_U = [0,3]
 indice_V = [1,2]
 U_conditional_mean, U_conditional_sigma = conditional_distribution(mean, sigma, indice_U, indice_V, V)
 
-x2 = np.arange(-2,2,0.1)
-x3 = np.arange(-2.5,1.5,0.1)
-con_pdf = np.zeros((len(x2),len(x3)))
-for i in range(len(x2)):
-    for j in range(len(x3)):
-        x = np.array([x2[i],x3[j]]).reshape((2,1))
+x1 = np.arange(-2,2,0.1)
+x4 = np.arange(-2,2,0.1)
+con_pdf = np.zeros((len(x1),len(x4)))
+for i in range(len(x1)):
+    for j in range(len(x4)):
+        x = np.array([x1[i],x4[j]]).reshape((2,1))
         u_pdf = multivariate_gaussian(x, U_conditional_mean.reshape((2,1)), U_conditional_sigma.reshape((2,2))).reshape(-1)
-        con_pdf[i][j] = u_pdf[0]
-        
-plt.contour(x2,x3,con_pdf)
-plt.xlabel('x2')
-plt.ylabel('x3')
+        con_pdf[j][i] = u_pdf[0]
+
+plt.contour(x1,x4,con_pdf)
+plt.xlabel('x1')
+plt.ylabel('x4')
+plt.show()'x3')
 plt.show()
